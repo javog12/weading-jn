@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Nuestra Boda! J & N</title>
+    <!-- Link to Tailwind CSS CDN for modern and responsive design -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Link to Google Fonts for Cormorant Garamond font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom styles for Cormorant Garamond font */
+        body {
+            font-family: 'Cormorant Garamond', serif; /* For paragraphs and general text (light/regular) */
+            font-weight: 300; /* Ensures a light weight by default for the body */
+            color: #000000; /* Black font color for the entire body */
+            overflow-x: hidden; /* Prevent horizontal scrollbar due to falling leaves */
+        }
+        h1, h2, h3 {
+            font-family: 'Cormorant Garamond', serif; /* For titles (bold) */
+            font-weight: 700; /* Ensures a bold weight by default for titles */
+            color: #000000; /* Black font color for all titles */
+        }
+        /* Class for the hero background with image */
+        .hero-background {
+            /* Unsplash photo of a couple embracing in black and white */
+            background-image: url('images/0V5A0847-min.jpg');
+            background-size: cover;
+            background-position: 50% 80%;
+            background-attachment: fixed; /* Parallax effect */
+        }
+        /* Overlay effect for hero text */
+        .hero-overlay {
+            background-color: rgba(0, 0, 0, 0.4); /* Darkens the image for text legibility */
+        }
+        /* Styles for countdown colons */
+        .countdown-colon {
+            font-size: 4rem; /* Adjusts colon size */
+            line-height: 1; /* Aligns colons vertically */
+            margin-bottom: 0.5rem; /* Adjusts bottom margin for alignment */
+            font-weight: 700; /* Ensures colons are bold */
+            color: #000000; /* Black color for colons */
+        }
+        @media (min-width: 768px) {
+            .countdown-colon {
+                font-size: 5rem;
+            }
+        }
+        @media (min-width: 1024px) {
+            .countdown-colon {
+                font-size: 6rem;
+            }
+        }
+
+        /* Styles for falling leaves */
+        .leaf {
+            position: fixed; /* Changed to fixed to fall across the entire viewport */
+            top: -50px; /* Start above the viewport */
+            width: var(--leaf-width); /* Set by JS */
+            height: var(--leaf-height); /* Set by JS */
+            opacity: 0.8;
+            pointer-events: none; /* Allow clicks through leaves */
+            z-index: 999; /* Ensure leaves are above content but below fixed nav */
+            /* Shape: a more distinct stylized leaf */
+            clip-path: polygon(50% 0%, 100% 30%, 80% 100%, 20% 100%, 0% 30%); /* Pointy leaf shape */
+            box-shadow: 0px 0px 5px rgba(0,0,0,0.2); /* Subtle shadow for better visibility */
+        }
+
+        /* Animation for falling and fading out */
+        @keyframes fall {
+            0% {
+                top: -50px; /* Start above the viewport */
+                transform: rotate(var(--initial-rotation, 0deg));
+                opacity: 0.8;
+            }
+            80% {
+                top: 100vh; /* Reach the bottom of the viewport */
+                opacity: 0.8;
+            }
+            100% {
+                top: calc(100vh + 50px); /* Go slightly beyond the viewport */
+                transform: rotate(calc(var(--initial-rotation, 0deg) + 720deg));
+                opacity: 0; /* Fade out as it disappears */
+            }
+        }
+
+        /* Animation for swaying (optional, adds realism) */
+        @keyframes sway {
+            0% { transform: translateX(0px); }
+            25% { transform: translateX(var(--sway-distance, 20px)); }
+            50% { transform: translateX(0px); }
+            75% { transform: translateX(calc(var(--sway-distance, 20px) * -1)); }
+            100% { transform: translateX(0px); }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-black">
+
+    <!-- Navigation Bar -->
+    <nav class="bg-white shadow-lg p-4 fixed w-full z-10 rounded-b-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <!-- "J & N" text in black in the menu -->
+            <a href="#" class="text-2xl font-bold text-black">J & N</a>
+
+            <!-- Hamburger menu button for mobile -->
+            <button id="menu-button" class="md:hidden text-gray-700 focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+
+            <!-- Navigation links - hidden on mobile by default, shown on desktop -->
+            <div id="nav-links" class="hidden md:flex flex-col md:flex-row md:space-x-4 mt-4 md:mt-0 w-full md:w-auto">
+                <a href="#historia" class="text-black hover:text-pink-600 transition duration-300 rounded-md px-3 py-2 text-center md:text-left">Nuestra Historia</a>
+                <a href="#detalles" class="text-black hover:text-pink-600 transition duration-300 rounded-md px-3 py-2 text-center md:text-left">Detalles del Evento</a>
+                <a href="#galeria" class="text-black hover:text-pink-600 transition duration-300 rounded-md px-3 py-2 text-center md:text-left">Galería</a>
+                <a href="#rsvp" class="text-black hover:text-pink-600 transition duration-300 rounded-md px-3 py-2 text-center md:text-left">Confirmar Asistencia</a>
+                <a href="#contacto" class="text-black hover:text-pink-600 transition duration-300 rounded-md px-3 py-2 text-center md:text-left">Contacto</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero-background h-screen flex items-center justify-center text-center relative">
+        <div class="hero-overlay absolute inset-0"></div>
+        
+        <!-- Main hero content -->
+        <div class="relative z-10 p-6 max-w-5xl mx-auto text-center flex flex-col items-center justify-center h-full">
+            <!-- Countdown Timer -->
+            <div id="countdown-timer" class="mb-12 mt-12">
+                <div class="flex justify-center items-end text-4xl md:text-5xl lg:text-6xl font-bold drop-shadow-lg">
+                    <div class="flex flex-col items-center mx-3">
+                        <span id="days" class="text-white">00</span>
+                        <span class="text-base md:text-lg font-light text-white">Días</span>
+                    </div>
+                    <span class="countdown-colon text-white">:</span>
+                    <div class="flex flex-col items-center mx-3">
+                        <span id="hours" class="text-white">00</span>
+                        <span class="text-base md:text-lg font-light text-white">Horas</span>
+                    </div>
+                    <span class="countdown-colon text-white">:</span>
+                    <div class="flex flex-col items-center mx-3">
+                        <span id="minutes" class="text-white">00</span>
+                        <span class="text-base md:text-lg font-light text-white">Minutos</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Names -->
+            <h1 class="text-6xl md:text-8xl lg:text-9xl font-extrabold mb-12 drop-shadow-lg text-white">
+                Javier & Nairobi
+            </h1>
+        </div>
+
+        <!-- Date and Location at the bottom -->
+        <div class="absolute bottom-6 left-1/2 -translate-x-1/2 w-full max-w-2xl z-10">
+            <div class="bg-white bg-opacity-80 backdrop-blur-sm p-4 rounded-xl shadow-xl flex flex-col md:flex-row justify-center items-center space-y-2 md:space-y-0 md:space-x-4 text-lg md:text-xl text-black font-semibold">
+                <span>Sábado 25 de octubre de 2025</span>
+                <span class="hidden md:block">|</span>
+                <span>Casa Quinta Reynaga</span>
+                <span>La Guardia</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Our Story Section -->
+    <section id="historia" class="py-16 bg-white">
+        <div class="container mx-auto px-4 max-w-4xl">
+            <h2 class="text-4xl font-bold text-center text-black mb-10 rounded-lg p-2">Nuestra Historia</h2>
+            <div class="flex flex-col md:flex-row items-center md:space-x-8">
+                <div class="md:w-1/2 mb-8 md:mb-0">
+                    <img src="https://placehold.co/600x400/FFD1DC/E91E63?text=Nuestra+Historia" alt="Nuestra Historia" class="rounded-xl shadow-lg w-full h-auto">
+                </div>
+                <div class="md:w-1/2 text-lg leading-relaxed text-black">
+                    <p class="mb-4">
+                        Nuestra historia comenzó en [Año], cuando [brief description of how they met, e.g.: "we met at a friends' event/at university/at work"]. From that first moment, we knew there was something special.
+                    </p>
+                    <p class="mb-4">
+                        Over the years, we have shared countless laughs, unforgettable adventures, and grown together. [Mention a special milestone or anecdote, e.g.: "From spontaneous trips to quiet nights at home, every moment has been a treasure"].
+                    </p>
+                    <p>
+                        On [Proposal Date], [Groom/Bride's Name] popped the question, and the answer was a resounding Yes! We are eager to start this new chapter and celebrate our love with all of you.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Event Details Section -->
+    <section id="detalles" class="py-16 bg-gradient-to-r from-purple-50 to-pink-50">
+        <div class="container mx-auto px-4 max-w-4xl">
+            <h2 class="text-4xl font-bold text-center text-black mb-10 rounded-lg p-2">Detalles del Evento</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Ceremony -->
+                <div class="bg-white p-8 rounded-xl shadow-lg transform hover:scale-105 transition duration-300">
+                    <h3 class="text-3xl font-semibold text-black mb-4">La Ceremonia</h3>
+                    <p class="text-lg mb-2 text-black">
+                        <span class="font-bold">Fecha:</span> [Day], [Month] of [Year]
+                    </p>
+                    <p class="text-lg mb-2 text-black">
+                        <span class="font-bold">Hora:</span> [Ceremony Time]
+                    </p>
+                    <p class="text-lg mb-4 text-black">
+                        <span class="font-bold">Lugar:</span> [Ceremony Venue Name], [Ceremony Venue Address]
+                    </p>
+                    <a href="https://maps.google.com/?q=[Ceremony Venue Address]" target="_blank" class="inline-block bg-pink-500 text-white px-6 py-3 rounded-full hover:bg-pink-600 transition duration-300 shadow-md">Ver en Mapa</a>
+                </div>
+
+                <!-- Reception -->
+                <div class="bg-white p-8 rounded-xl shadow-lg transform hover:scale-105 transition duration-300">
+                    <h3 class="text-3xl font-semibold text-black mb-4">La Recepción</h3>
+                    <p class="text-lg mb-2 text-black">
+                        <span class="font-bold">Fecha:</span> [Day], [Month] of [Year]
+                    </p>
+                    <p class="text-lg mb-2 text-black">
+                        <span class="font-bold">Hora:</span> [Reception Time]
+                    </p>
+                    <p class="text-lg mb-4 text-black">
+                        <span class="font-bold">Lugar:</span> [Reception Venue Name], [Reception Venue Address]
+                    </p>
+                    <a href="https://maps.google.com/?q=[Reception Venue Address]" target="_blank" class="inline-block bg-purple-500 text-white px-6 py-3 rounded-full hover:bg-purple-600 transition duration-300 shadow-md">Ver en Mapa</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="galeria" class="py-16 bg-white">
+        <div class="container mx-auto px-4 max-w-6xl">
+            <h2 class="text-4xl font-bold text-center text-black mb-10 rounded-lg p-2">Nuestra Galería</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Image placeholders -->
+                <div class="rounded-xl overflow-hidden shadow-lg transform hover:scale-105 transition duration-300">
+                    <img src="https://placehold.co/600x400/C8A2C8/FFFFFF?text=Foto+1" alt="Foto 1" class="w-full h-auto object-cover">
+                </div>
+                <div class="rounded-xl overflow-hidden shadow-lg transform hover:scale-105 transition duration-300">
+                    <img src="https://placehold.co/600x400/FFB6C1/FFFFFF?text=Foto+2" alt="Foto 2" class="w-full h-auto object-cover">
+                </div>
+                <div class="rounded-xl overflow-hidden shadow-lg transform hover:scale-105 transition duration-300">
+                    <img src="https://placehold.co/600x400/ADD8E6/FFFFFF?text=Foto+3" alt="Foto 3" class="w-full h-auto object-cover">
+                </div>
+                <div class="rounded-xl overflow-hidden shadow-lg transform hover:scale-105 transition duration-300">
+                    <img src="https://placehold.co/600x400/90EE90/FFFFFF?text=Foto+4" alt="Foto 4" class="w-full h-auto object-cover">
+                </div>
+                <div class="rounded-xl overflow-hidden shadow-lg transform hover:scale-105 transition duration-300">
+                    <img src="https://placehold.co/600x400/FFD700/FFFFFF?text=Foto+5" alt="Foto 5" class="w-full h-auto object-cover">
+                </div>
+                <div class="rounded-xl overflow-hidden shadow-lg transform hover:scale-105 transition duration-300">
+                    <img src="https://placehold.co/600x400/DDA0DD/FFFFFF?text=Foto+6" alt="Foto 6" class="w-full h-auto object-cover">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- RSVP Section -->
+    <section id="rsvp" class="py-16 bg-gradient-to-l from-purple-50 to-pink-50 text-center">
+        <div class="container mx-auto px-4 max-w-3xl">
+            <h2 class="text-4xl font-bold text-black mb-8 rounded-lg p-2">Confirmar Asistencia</h2>
+            <p class="text-xl mb-6 leading-relaxed text-black">
+                Por favor, ayúdanos a planificar este día tan especial confirmando tu asistencia antes del **[RSVP Deadline Date]**.
+            </p>
+            <p class="text-xl mb-8 leading-relaxed text-black">
+                Puedes confirmar tu asistencia de las siguientes maneras:
+            </p>
+            <div class="bg-white p-8 rounded-xl shadow-lg inline-block max-w-md transform hover:scale-105 transition duration-300">
+                <p class="text-2xl font-semibold text-black mb-4">Opción 1: Correo Electrónico</p>
+                <p class="text-lg mb-4 text-black">Envíanos un correo a:</p>
+                <a href="mailto:tucorreo@ejemplo.com" class="inline-block bg-pink-500 text-white px-6 py-3 rounded-full hover:bg-pink-600 transition duration-300 shadow-md">tucorreo@ejemplo.com</a>
+            </div>
+            <div class="bg-white p-8 rounded-xl shadow-lg inline-block max-w-md mt-6 md:ml-6 transform hover:scale-105 transition duration-300">
+                <p class="text-2xl font-semibold text-black mb-4">Opción 2: WhatsApp</p>
+                <p class="text-lg mb-4 text-black">Envíanos un mensaje a:</p>
+                <a href="https://wa.me/[YourPhoneNumber]" target="_blank" class="inline-block bg-purple-500 text-white px-6 py-3 rounded-full hover:bg-purple-600 transition duration-300 shadow-md">
+                    [Your Phone Number]
+                </a>
+            </div>
+            <p class="text-lg mt-8 text-black">
+                ¡Esperamos verte allí!
+            </p>
+        </div>
+    </section>
+
+    <!-- Contact / Footer Section -->
+    <footer id="contacto" class="bg-gray-200 text-black py-10 rounded-t-lg">
+        <div class="container mx-auto px-4 text-center">
+            <h3 class="text-3xl font-bold text-black mb-6">¿Preguntas? ¡Contáctanos!</h3>
+            <p class="text-lg mb-2">
+                <span class="font-semibold">Correo Electrónico:</span> <a href="mailto:info@tudominio.com" class="text-black hover:underline">info@tudominio.com</a>
+            </p>
+            <p class="text-lg mb-6">
+                <span class="font-semibold">Teléfono:</span> <a href="tel:+1234567890" class="text-black hover:underline">+123 456 7890</a>
+            </p>
+            <p class="text-sm mt-8 text-black">
+                &copy; [Current Year] J & N. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Set the date we're counting down to (October 25, 2025, 00:00:00)
+        const weddingDate = new Date("October 25, 2025 00:00:00").getTime();
+
+        // Update the countdown every 1 second
+        const countdownFunction = setInterval(function() {
+
+            // Get today's date and time
+            const now = new Date().getTime();
+
+            // Find the distance between now and the wedding date
+            const distance = weddingDate - now;
+
+            // Time calculations for days, hours, minutes
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+
+            // Display the result in the corresponding elements
+            document.getElementById("days").innerHTML = days < 10 ? "0" + days : days;
+            document.getElementById("hours").innerHTML = hours < 10 ? "0" + hours : hours;
+            document.getElementById("minutes").innerHTML = minutes < 10 ? "0" + minutes : minutes;
+
+            // If the countdown is over, display a message
+            if (distance < 0) {
+                clearInterval(countdownFunction);
+                document.getElementById("countdown-timer").innerHTML = "<span class='text-2xl md:text-3xl font-semibold drop-shadow-lg text-black'>¡Ya nos casamos!</span>";
+            }
+        }, 1000);
+
+        // JavaScript for falling leaves effect
+        function createLeaf() {
+            const leaf = document.createElement('div');
+            leaf.classList.add('leaf');
+
+            // Randomize initial position (x-axis)
+            leaf.style.left = Math.random() * 100 + 'vw';
+
+            // Randomize size and elongation
+            const size = Math.random() * 25 + 15; // Leaves between 15px and 40px (slightly larger)
+            leaf.style.setProperty('--leaf-width', size + 'px');
+            leaf.style.setProperty('--leaf-height', size * (1.2 + Math.random() * 0.8) + 'px'); // Elongation between 1.2x and 2x
+
+            // Randomize animation duration (how fast they fall)
+            const fallDuration = Math.random() * 10 + 5; // Fall between 5 and 15 seconds
+            const swayDuration = Math.random() * 3 + 2; // Sway between 2 and 5 seconds
+            const delay = Math.random() * 5; // Delay up to 5 seconds
+
+            // Randomize initial rotation and sway distance
+            leaf.style.setProperty('--initial-rotation', Math.random() * 360 + 'deg');
+            leaf.style.setProperty('--sway-distance', Math.random() * 40 + 20 + 'px');
+
+            // Set animations with forwards fill-mode for 'fall'
+            // 'forwards' ensures the animation stays at its end state (stuck at the bottom)
+            leaf.style.animation = `fall ${fallDuration}s linear ${delay}s infinite, sway ${swayDuration}s ease-in-out ${delay}s infinite`;
+
+            // Randomize leaf color (subtle variations in autumn hues: reds, oranges, yellows)
+            const hue = Math.floor(Math.random() * 60); // 0-60 for reds, oranges, yellows
+            const saturation = Math.floor(Math.random() * 30) + 70; // 70-100% saturation (more vibrant)
+            const lightness = Math.floor(Math.random() * 20) + 40; // 40-60% lightness
+            leaf.style.backgroundColor = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+            
+            document.body.appendChild(leaf); // Append to body to fall across the whole page
+
+            // Remove leaf after it falls off screen to prevent performance issues
+            leaf.addEventListener('animationend', () => {
+                leaf.remove();
+            });
+        }
+
+        // Generate new leaves periodically
+        setInterval(createLeaf, 2000); // Increased interval to 2000ms (2 seconds) for fewer leaves
+    </script>
+
+</body>
+</html>
