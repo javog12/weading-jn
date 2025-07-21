@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>¡Nuestra Boda! J & N</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* Custom styles for Cormorant Garamond font */
+        /* Custom styles for Cormorant Garamond and Playfair Display fonts */
         body {
             font-family: 'Cormorant Garamond', serif; /* For paragraphs and general text (light/regular) */
             font-weight: 300; /* Ensures a light weight by default for the body */
@@ -18,6 +18,13 @@
             font-family: 'Cormorant Garamond', serif; /* For titles (bold) */
             font-weight: 700; /* Ensures a bold weight by default for titles */
             color: #000000; /* Black font color for all titles */
+        }
+        /* Custom Tailwind font classes */
+        .font-playfair {
+            font-family: 'Playfair Display', serif;
+        }
+        .font-cormorant-garamond {
+            font-family: 'Cormorant Garamond', serif;
         }
         /* Class for the hero background with image */
         .hero-background {
@@ -90,6 +97,61 @@
             75% { transform: translateX(calc(var(--sway-distance, 20px) * -1)); }
             100% { transform: translateX(0px); }
         }
+        /* Custom decorative background for the story section */
+        #historia {
+            position: relative; /* Required for pseudo-elements */
+            background-color: #fdf2f8; /* A very light, soft pink base (Tailwind's pink-50) */
+            overflow: hidden; /* Prevents pseudo-elements from spilling out */
+            z-index: 0;
+        }
+
+        #historia::before,
+        #historia::after {
+            content: '';
+            position: absolute;
+            background-image: url('images/6644.jpg');
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.15; /* Very subtle opacity */
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Mobile & Tablet: Two smaller decorations emerging from the sides */
+        #historia::before {
+            top: 1rem;      /* Position near the top */
+            left: -3rem;    /* Emerge from the left side */
+            transform: rotate(-25deg);
+            width: 150px;
+            height: 150px;
+        }
+
+        #historia::after {
+            display: block; /* Ensure it's always visible */
+            top: 1rem;      /* Match the top position */
+            right: -3rem;   /* Emerge from the right side */
+            transform: scaleX(-1) rotate(-25deg); /* Mirrored and rotated */
+            width: 150px;
+            height: 150px;
+        }
+
+        /* Desktop: Larger decorations, vertically centered and more prominent */
+        @media (min-width: 1024px) {
+            #historia::before {
+                top: 50%;
+                left: 3rem; /* Moved more towards the center */
+                transform: translateY(-50%) rotate(-15deg);
+                width: 400px; /* Made larger */
+                height: 100%;
+            }
+            #historia::after {
+                top: 50%;
+                right: 3rem; /* Moved more towards the center */
+                transform: translateY(-50%) scaleX(-1) rotate(-15deg);
+                width: 400px; /* Made larger */
+                height: 100%;
+            }
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-black">
@@ -150,22 +212,24 @@
             </div>
     </header>
 
-    <section id="historia" class="py-16 bg-white">
+    <section id="historia" class="py-20 md:py-24">
         <div class="container mx-auto px-4 max-w-4xl">
-            <h2 class="text-4xl font-bold text-center text-black mb-10 rounded-lg p-2">Nuestra Historia</h2>
+            <h2 class="font-playfair text-5xl text-center text-gray-700 mb-4">Nuestra Historia</h2>
+            <div class="w-24 h-px bg-pink-200 mx-auto mb-12"></div>
             <div class="flex flex-col md:flex-row items-center md:space-x-8">
-                <div class="md:w-1/2 mb-8 md:mb-0">
-                    <img src="images/0V5A0860-min.jpg" alt="Nuestra Historia" class="rounded-xl shadow-lg w-full h-auto">
+                <div class="md:w-1/2 mb-8 md:mb-0 relative group">
+                    <img src="images/0V5A0860-min.jpg" alt="Nuestra Historia" class="rounded-xl shadow-lg w-full h-auto transform group-hover:scale-105 transition duration-500 ease-in-out">
+                    <div class="absolute inset-0 border-2 border-pink-200 rounded-xl pointer-events-none opacity-0 group-hover:opacity-100 transition duration-500 ease-in-out"></div>
                 </div>
-                <div class="md:w-1/2 text-lg leading-relaxed text-black">
+                <div class="md:w-1/2 font-playfair text-lg leading-loose text-gray-800">
                     <p class="mb-4">
-                        Nuestra historia comenzó en <span class="font-semibold">2018</span>, cuando <span class="font-semibold">nos conocimos en un evento de amigos en Santa Cruz</span>. Desde ese primer momento, supimos que había algo especial.
+                        Nuestra historia comenzó en <span class="font-semibold text-pink-600">2018</span>, cuando <span class="font-semibold text-pink-600">nos conocimos en un evento de amigos en Santa Cruz</span>. Desde ese primer momento, supimos que había algo especial.
                     </p>
                     <p class="mb-4">
-                        A lo largo de los años, hemos compartido innumerables risas, aventuras inolvidables y hemos crecido juntos. <span class="font-semibold">Desde viajes espontáneos a las misiones jesuíticas hasta noches tranquilas en casa, cada momento ha sido un tesoro</span>.
+                        A lo largo de los años, hemos compartido innumerables risas, aventuras inolvidables y hemos crecido juntos. <span class="font-semibold text-pink-600">Desde viajes espontáneos a las misiones jesuíticas hasta noches tranquilas en casa, cada momento ha sido un tesoro</span>.
                     </p>
                     <p>
-                        El <span class="font-semibold">14 de febrero de 2024</span>, <span class="font-semibold">Javier</span> hizo la gran pregunta, ¡y la respuesta fue un rotundo Sí! Estamos ansiosos por comenzar este nuevo capítulo y celebrar nuestro amor con todos ustedes.
+                        El <span class="font-semibold text-pink-600">14 de febrero de 2024</span>, <span class="font-semibold text-pink-600">Javier</span> hizo la gran pregunta, ¡y la respuesta fue un rotundo Sí! Estamos ansiosos por comenzar este nuevo capítulo y celebrar nuestro amor con todos ustedes.
                     </p>
                 </div>
             </div>
