@@ -1,0 +1,90 @@
+/* Base Styles for the entire body */
+body {
+    font-family: 'Cormorant Garamond', serif; /* Default font for paragraphs and general text */
+    font-weight: 300; /* Light weight by default */
+    overflow-x: hidden; /* Prevents horizontal scrollbar from falling leaves */
+}
+/* Styles for all heading elements (h1, h2, h3) */
+h1, h2, h3 {
+    font-family: 'Cormorant Garamond', serif; /* Bold font for titles */
+    font-weight: 700; /* Ensures a bold weight for titles */
+}
+/* Custom Tailwind-like font classes */
+.font-playfair {
+    font-family: 'Playfair Display', serif;
+}
+.font-cormorant-garamond {
+    font-family: 'Cormorant Garamond', serif;
+}
+
+/* Hero Section Styles */
+.hero-background {
+    /* Background image for the hero section with parallax effect */
+    background-image: url('../images/0V5A0847-min.jpg'); /* Adjust path relative to CSS file */
+    background-size: cover;
+    background-position: 50% 80%; /* Adjusts image position */
+    background-attachment: fixed; /* Creates parallax effect */
+}
+.hero-overlay {
+    /* Darkens the hero image for better text legibility */
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+/* Countdown Timer Styles */
+.countdown-colon {
+    font-size: 4rem; /* Base size for colons */
+    line-height: 1; /* Aligns colons vertically with numbers */
+    margin-bottom: 0.5rem; /* Adjusts bottom margin for alignment */
+    font-weight: 700; /* Bold colons */
+}
+/* Responsive adjustments for countdown colons */
+@media (min-width: 768px) {
+    .countdown-colon {
+        font-size: 5rem;
+    }
+}
+@media (min-width: 1024px) {
+    .countdown-colon {
+        font-size: 6rem;
+    }
+}
+
+/* Falling Leaves Animation Styles */
+.leaf {
+    position: fixed; /* Fixed position to fall across the entire viewport */
+    top: -50px; /* Starts above the viewport */
+    width: var(--leaf-width); /* Width controlled by JS */
+    height: var(--leaf-height); /* Height controlled by JS */
+    opacity: 0.8;
+    pointer-events: none; /* Allows clicks through leaves */
+    z-index: 999; /* Ensures leaves are above content */
+    /* Stylized leaf shape using clip-path */
+    clip-path: polygon(50% 0%, 100% 30%, 80% 100%, 20% 100%, 0% 30%);
+    box-shadow: 0px 0px 5px rgba(0,0,0,0.2); /* Subtle shadow for depth */
+}
+
+/* Keyframe animation for falling motion */
+@keyframes fall {
+    0% {
+        top: -50px; /* Start above viewport */
+        transform: rotate(var(--initial-rotation, 0deg)); /* Initial rotation set by JS */
+        opacity: 0.8;
+    }
+    80% {
+        top: 100vh; /* Reach the bottom of the viewport */
+        opacity: 0.8;
+    }
+    100% {
+        top: calc(100vh + 50px); /* Go slightly beyond viewport */
+        transform: rotate(calc(var(--initial-rotation, 0deg) + 720deg)); /* Continues rotation */
+        opacity: 0; /* Fade out as it disappears */
+    }
+}
+/* Keyframe animation for subtle swaying motion (optional realism) */
+@keyframes sway {
+    0% { transform: translateX(0px); }
+    25% { transform: translateX(var(--sway-distance, 20px)); }
+    50% { transform: translateX(0px); }
+    75% { transform: translateX(calc(var(--sway-distance, 20px) * -1)); }
+    100% { transform: translateX(0px); }
+}
