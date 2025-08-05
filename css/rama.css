@@ -1,0 +1,47 @@
+/* ==========================================================================
+   Estilos para las ramas decorativas de la sección "Nuestra Historia"
+   Enfoque: Ramas que escapan horizontalmente de los bordes a la altura del título.
+   ========================================================================== */
+
+/* Estilos base para ambas ramas (Mobile-First) */
+.side-branch {
+    position: absolute;
+    z-index: -1; /* Coloca las ramas detrás del contenido */
+    pointer-events: none;
+    transition: all 0.4s ease-out;
+    filter: saturate(70%);
+
+    /* --- Mobile Styles (sutil) --- */
+    width: 180px;
+    opacity: 0.25;
+    /* Vertical Alignment: section padding-top (py-20 = 5rem) + half h2 height (1.5rem) */
+    top: 6.5rem;
+}
+ 
+/* Rama Izquierda */
+.side-branch-left {
+    left: -120px; /* La rama asoma sutilmente desde la izquierda */
+    transform: translateY(-50%) rotate(10deg);
+}
+
+/* Rama Derecha */
+.side-branch-right {
+    right: -120px; /* La rama asoma sutilmente desde la derecha */
+    transform: translateY(-50%) scaleX(-1) rotate(10deg); /* Volteada y rotada */
+}
+
+/* --- Desktop Styles (grande y escapando) --- */
+@media (min-width: 768px) {
+    .side-branch {
+        width: 400px; /* Mucho más grande para un efecto dramático */
+        opacity: 0.3;
+        /* Vertical Alignment: section padding-top (md:py-24 = 6rem) + half h2 height (1.5rem) */
+        top: 7.5rem;
+    }
+    .side-branch-left {
+        left: -250px; /* Escapa más del borde */
+    }
+    .side-branch-right {
+        right: -250px; /* Escapa más del borde */
+    }
+}

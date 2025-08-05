@@ -8,6 +8,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/invitacion.css">
+    <link rel="stylesheet" href="css/rama.css">
 </head>
 <body class="bg-[#f8faf4] text-[#626c56]">
 
@@ -53,29 +55,63 @@
                     </div>
                 </div>
             </div>
-            <h1 class="text-4xl md:text-7xl lg:text-9xl font-extrabold mb-8 drop-shadow-lg text-white">
+            <p class="text-2xl md:text-3xl font-playfair text-white/90 drop-shadow-md mb-2 tracking-wider">
+                ¡Nos Casamos!
+            </p>
+            <h1 class="text-4xl md:text-7xl lg:text-9xl font-extrabold mb-6 drop-shadow-lg text-white">
                 Javier & Nairobi
             </h1>
-            <div class="mt-4 md:absolute md:bottom-24 md:left-1/2 md:-translate-x-1/2 md:w-full md:max-w-2xl md:z-10">
-                <ul class="bg-white bg-opacity-15 backdrop-blur-sm px-6 py-3 rounded-xl shadow-lg flex flex-col md:flex-row justify-center items-center space-y-2 md:space-y-0 md:space-x-4 text-sm md:text-base text-white font-medium tracking-wide list-none">
-                    <li>Sábado 25 de octubre de 2025</li>
-                    <li class="hidden md:block" aria-hidden="true">|</li>
-                    <li>Casa Quinta Reynaga | La Guardia</li>
-                </ul>
+            <div class="mt-4 md:absolute md:bottom-16 md:left-1/2 md:-translate-x-1/2 md:w-full md:max-w-5xl md:z-10 text-center px-4">
+                <blockquote class="text-lg md:text-2xl lg:text-3xl text-white font-playfair italic drop-shadow-md leading-relaxed">
+                    <p>
+                        Nuestro amor, un regalo de Dios, se convierte hoy en un pacto eterno.<br>
+                        Un solo corazón y una sola alma,<br>
+                        para amarnos y honrarnos<br>
+                        por siempre.
+                    </p>
+                </blockquote>
             </div>
     </header>
 
-    <section id="historia" class="py-20 md:py-24">
-        <div class="container mx-auto px-4 max-w-4xl">
-            <h2 class="font-playfair text-5xl text-center text-[#4c6c45] mb-4">Nuestra Historia</h2>
+    <section id="invitacion-personal" class="py-16 md:py-20 bg-[#eef1ea]">
+        <div class="container mx-auto px-4">
+            <!-- Invitation Card with a decorative border -->
+            <div class="max-w-2xl mx-auto bg-white/50 p-1 rounded-2xl shadow-xl border border-white/70">
+                <div class="bg-[#fdfdfa] p-8 md:p-12 rounded-xl text-center border border-gray-200/50">
+                    <p class="font-cormorant-garamond text-lg text-[#626c56] tracking-widest uppercase mb-2">
+                        Una invitación especial para
+                    </p>
+                    <h2 class="font-playfair text-4xl md:text-5xl text-[#4c6c45] my-3">
+                        <span id="guest-names">Invitados</span>
+                    </h2>
+                    <div class="w-24 h-px bg-[#c4d1b8] mx-auto my-6"></div>
+                    <p class="font-cormorant-garamond text-xl md:text-2xl leading-relaxed text-[#626c56] mb-8">
+                        Con gran alegría, queremos que nos acompañen a celebrar el comienzo de nuestra vida juntos en este día tan especial.
+                    </p>
+                    <p class="font-playfair text-2xl text-[#626c56] italic">
+                        Con cariño,<br>
+                        Javier & Nairobi
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="historia" class="py-20 md:py-24 relative overflow-hidden">
+        <!-- Elementos decorativos de fondo que escapan de los bordes -->
+        <img src="images/rama1.svg" alt="" aria-hidden="true" class="side-branch side-branch-left">
+        <img src="images/rama1.svg" alt="" aria-hidden="true" class="side-branch side-branch-right">
+
+        <div class="container mx-auto px-4 max-w-4xl text-center relative z-1"> <!-- Added relative z-1 to ensure content is above branches -->
+            <h2 class="font-playfair text-5xl text-[#4c6c45] mb-4">Nuestra Historia</h2>
             <div class="w-24 h-px bg-[#626c56]/50 mx-auto mb-12"></div>
-            <div class="flex flex-col md:flex-row items-center md:space-x-8">
-                <div class="md:w-1/2 mb-8 md:mb-0">
+            <div class="flex flex-col md:flex-row items-center md:gap-12">
+                <div class="md:w-1/2 w-full max-w-md mb-12 md:mb-0">
                     <div class="bg-white p-3 md:p-4 rounded-2xl shadow-xl transform -rotate-2 hover:rotate-0 transition-transform duration-300 border border-gray-200">
                         <img src="images/0V5A0860-min.jpg" alt="Javier and Nairobi's Story" class="rounded-xl w-full h-auto">
                     </div>
                 </div>
-                <div class="md:w-1/2 font-cormorant-garamond text-lg leading-loose text-[#626c56]">
+                <div class="md:w-1/2 text-center md:text-left font-cormorant-garamond text-xl md:text-2xl leading-loose text-[#626c56]">
                     <p class="mb-4">
                         Nuestra historia comenzó en <span class="font-semibold">2018</span>, cuando <span class="font-semibold">nos conocimos en un evento de amigos en Santa Cruz</span>. Desde ese primer momento, supimos que había algo especial.
                     </p>
@@ -258,6 +294,7 @@
     <script src="js/countdown.js"></script>
     <script src="js/leaves.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/personalize.js"></script>
 
 </body>
 </html>

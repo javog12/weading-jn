@@ -1,0 +1,20 @@
+#invitacion-personal {
+    position: relative;
+    overflow: hidden; /* To contain the pseudo-element */
+    z-index: 0;
+}
+
+#invitacion-personal::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../images/ramo1.svg'); /* La imagen que usaremos */
+    background-size: contain; /* Asegura que la imagen quepa completa en la sección */
+    background-position: center center; /* Centra la imagen */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+    opacity: 0.15; /* Un poco más visible pero sutil */
+    z-index: -1;
+}s
