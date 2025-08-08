@@ -98,6 +98,13 @@
     box-shadow: 0 0 0 3px rgba(76, 108, 69, 0.2);
 }
 
+/* --- NUEVO: Estilo para el campo de nombre cuando es de solo lectura --- */
+.form-group input[type="text"][readonly] {
+    background-color: #eef1ea; /* Un tono de la paleta para indicar que no es editable */
+    cursor: not-allowed;
+    color: #866C5B; /* Un color de texto que contraste pero se vea "deshabilitado" */
+}
+
 .form-group select {
     appearance: none;
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23626c56' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
