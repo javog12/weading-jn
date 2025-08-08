@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmación de Asistencia a la Boda</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+
+    <style>
+        /* Aplicando la paleta de colores y estilos */
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #F5F9E6; /* Blanco Marfil/Cremoso para el fondo */
+            color: #4B4B34; /* Verde Oliva Oscuro para el texto principal */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .form-container {
+            background: #ffffff; /* Un fondo blanco nítido para el contenedor del formulario */
+            padding: 2.5em 3em;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            max-width: 500px;
+            width: 100%;
+            border-top: 5px solid #6C6E4A; /* Borde superior con el Verde Salvia */
+        }
+
+        .form-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5em;
+            text-align: center;
+            color: #4B4B34;
+            margin-top: 0;
+            margin-bottom: 0.2em;
+        }
+
+        .form-header p {
+            text-align: center;
+            font-size: 1.1em;
+            margin-bottom: 1em; /* Reducido para dar espacio a la nueva sección */
+            color: #866C5B; /* Marrón Topo para el subtítulo */
+        }
+
+        /* --- NUEVOS ESTILOS PARA EL AVISO --- */
+        .kids-notice {
+            text-align: center;
+            padding: 1.5em;
+            margin: 1.5em 0;
+            border: 1px solid #C5BCAD;
+            border-radius: 8px;
+            background-color: #F5F9E6;
+        }
+        .kids-notice .heart-icon {
+            font-size: 1.5em;
+            color: #4B4B34;
+            margin-bottom: 0.2em;
+        }
+        .kids-notice .intro-text {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.4em;
+            margin: 0.2em 0;
+        }
+        .kids-notice .main-text {
+            font-size: 1em;
+            line-height: 1.6;
+            margin: 0.5em 0;
+        }
+        .kids-notice .separator {
+            border: 0;
+            border-top: 1px dotted #866C5B;
+            width: 50%;
+            margin: 1.2em auto;
+        }
+        /* --- FIN DE NUEVOS ESTILOS --- */
+
+
+        .form-group {
+            margin-bottom: 1.5em;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.6em;
+            font-weight: 700;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #C5BCAD; /* Borde con el color Piedra/Beige */
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1em;
+            background-color: #ffffff;
+            color: #4B4B34;
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #6C6E4A; /* Borde Verde Salvia al enfocar */
+            box-shadow: 0 0 0 3px rgba(108, 110, 74, 0.2);
+        }
+
+        button[type="submit"] {
+            width: 100%;
+            padding: 15px;
+            background-color: #6C6E4A; /* Botón en Verde Salvia */
+            color: #F5F9E6; /* Texto del botón en Blanco Cremoso */
+            border: none;
+            border-radius: 6px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 1em;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #4B4B34; /* Hover del botón en Verde Oliva Oscuro */
+        }
+        
+        #form-status {
+            text-align: center;
+            margin-top: 1.5em;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <div class="form-header">
+            <h2>Confirma tu Asistencia</h2>
+            <p>Nos haría muy felices que nos acompañes.</p>
+        </div>
+        
+        <div class="kids-notice">
+            <div class="heart-icon">♥</div>
+            <p class="intro-text">Con respeto...</p>
+            <p class="main-text">Aunque apreciamos a sus pequeños, hemos decidido celebrar este momento sin niños.</p>
+            <hr class="separator">
+            <p class="main-text">Deseamos que esta decisión no les impida celebrar nuestro día.</p>
+        </div>
+        <form id="rsvp-form" action="https://formspree.io/f/xanblzon" method="POST">
+            
+            <div class="form-group">
+                <label for="name">Nombre(s) y Apellido(s):</label>
+                <input type="text" id="name" name="NombreCompleto" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="attendance">¿Podrás acompañarnos?</label>
+                <select id="attendance" name="Asistencia" required>
+                    <option value="" disabled selected>Por favor, selecciona una opción...</option>
+                    <option value="Si, asistire">¡Sí, con mucho gusto asistiré!</option>
+                    <option value="No podre asistir">Lamentablemente, no podré asistir</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="message">Déjanos un mensaje o una canción que no pueda faltar:</label>
+                <textarea id="message" name="MensajeCancion" rows="4" placeholder="(Opcional)"></textarea>
+            </div>
+
+            <button type="submit">Enviar Confirmación</button>
+        </form>
+        <p id="form-status"></p>
+    </div>
+
+    <script>
+        var form = document.getElementById("rsvp-form");
+        
+        async function handleSubmit(event) {
+          event.preventDefault();
+          var status = document.getElementById("form-status");
+          var data = new FormData(event.target);
+          
+          fetch(event.target.action, {
+            method: form.method,
+            body: data,
+            headers: { 'Accept': 'application/json' }
+          }).then(response => {
+            if (response.ok) {
+              status.innerHTML = "¡Gracias! Tu confirmación ha sido enviada.";
+              status.style.color = "#6C6E4A";
+              form.reset();
+            } else {
+              response.json().then(data => {
+                if (Object.hasOwn(data, 'errors')) {
+                  status.innerHTML = data["errors"].map(error => error["message"]).join(", ");
+                } else {
+                  status.innerHTML = "Oops! Hubo un problema al enviar el formulario.";
+                }
+                status.style.color = "#8B0000"; // Un color rojo oscuro para errores
+              });
+            }
+          }).catch(error => {
+            status.innerHTML = "Oops! Hubo un problema al enviar el formulario.";
+            status.style.color = "#8B0000";
+          });
+        }
+        form.addEventListener("submit", handleSubmit);
+    </script>
+
+</body>
+</html>
