@@ -41,4 +41,5 @@ function createPetal() {
 }
 
 // Generamos nuevos pétalos periódicamente para un efecto más denso
-setInterval(createPetal, 400);
+// Aumentamos el intervalo para que caigan menos pétalos (antes 400ms).
+setInterval(createPetal, 800);
