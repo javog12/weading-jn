@@ -5,32 +5,34 @@ document.addEventListener('DOMContentLoaded', function() {
     // Get the unique code from the 'invitados' parameter (e.g., "j&n01")
     const guestCode = urlParams.get('invitados');
 
-    const invitationSection = document.getElementById('invitacion-personal');
-    const guestNamesElement = document.getElementById('guest-names');
-    const guestPassesElement = document.getElementById('guest-passes');
-    // --- NUEVO: Obtener el campo de nombre del formulario RSVP ---
-    const rsvpNameInput = document.getElementById('name');
+    // Check if a valid guest code is provided.
+    // The guestList object is defined in guests.js
+    if (guestCode && guestList[guestCode]) {
+        // --- Code is valid, proceed to personalize the page ---
+        const invitationSection = document.getElementById('invitacion-personal');
+        const guestNamesElement = document.getElementById('guest-names');
+        const guestPassesElement = document.getElementById('guest-passes');
+        const rsvpNameInput = document.getElementById('name');
 
+        // Ensure all required elements exist before trying to modify them
+        if (invitationSection && guestNamesElement && guestPassesElement) {
+            const guestData = guestList[guestCode];
 
-    // Check if a guest code is provided in the URL and if it exists in our guestList
-    if (guestCode && guestList[guestCode] && invitationSection && guestNamesElement && guestPassesElement) {
-        const guestData = guestList[guestCode];
+            // Populate the elements with the data for that specific guest
+            guestNamesElement.textContent = guestData.names;
+            guestPassesElement.textContent = guestData.passes;
 
-        // Populate the elements with the data for that specific guest
-        guestNamesElement.textContent = guestData.names;
-        guestPassesElement.textContent = guestData.passes;
+            // Pre-fill the RSVP form name and make it read-only
+            if (rsvpNameInput) {
+                rsvpNameInput.value = guestData.names;
+                rsvpNameInput.readOnly = true;
+            }
 
-
-        // --- NUEVO: Pre-rellenar el campo del formulario y hacerlo de solo lectura ---
-        if (rsvpNameInput) {
-            rsvpNameInput.value = guestData.names;
-            rsvpNameInput.readOnly = true;
+            // Make the personalized section visible
+            invitationSection.classList.remove('hidden');
         }
-
-        // Make the personalized section visible
-        invitationSection.classList.remove('hidden');
     } else {
-        // If no code is provided or the code is invalid, hide the section.
-        invitationSection.classList.add('hidden');
+        // --- Code is missing or invalid, redirect to a private access page ---
+        window.location.href = 'private.html';
     }
 });
