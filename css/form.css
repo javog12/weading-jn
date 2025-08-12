@@ -12,28 +12,28 @@
     border-radius: 12px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
     width: 100%;
-    border-top: 5px solid #626c56; /* Tono verde de la paleta */
+    border-top: 5px solid #6C6E4A; /* CORREGIDO: Tono de acento principal */
 }
 
 .form-header p {
     text-align: center;
     font-size: 1.1em;
     margin-bottom: 1em;
-    color: #866C5B;
+    color: #866C5B; /* Mantenido: Color neutro de la paleta */
 }
 
 .kids-notice {
     text-align: center;
     padding: 1.5em;
     margin: 1.5em 0;
-    border: 1px solid #c4d1b8;
+    border: 1px solid #C5BCAD; /* CORREGIDO: Borde con tono neutro */
     border-radius: 8px;
-    background-color: #f8faf4;
+    background-color: rgba(245, 249, 230, 0.4); /* CORREGIDO: Fondo sutil de la paleta principal */
 }
 
 .kids-notice .heart-icon {
     font-size: 1.5em;
-    color: #4c6c45;
+    color: #6C6E4A; /* CORREGIDO: Color de acento */
     margin-bottom: 0.2em;
 }
 
@@ -42,19 +42,19 @@
     font-style: italic;
     font-size: 1.4em;
     margin: 0.2em 0;
-    color: #626c56;
+    color: #4B4B34; /* CORREGIDO: Color de texto principal */
 }
 
 .kids-notice .main-text {
     font-size: 1em;
     line-height: 1.6;
     margin: 0.5em 0;
-    color: #626c56;
+    color: #4B4B34; /* CORREGIDO: Color de texto principal */
 }
 
 .kids-notice .separator {
     border: 0;
-    border-top: 1px dotted #866C5B;
+    border-top: 1px dotted #866C5B; /* Mantenido: Color neutro de la paleta */
     width: 50%;
     margin: 1.2em auto;
 }
@@ -70,7 +70,7 @@
     font-size: 0.9em;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    color: #626c56;
+    color: #4B4B34; /* CORREGIDO: Color de texto principal */
 }
 
 .form-group input[type="text"],
@@ -79,13 +79,13 @@
 .form-group textarea {
     width: 100%;
     padding: 12px;
-    border: 1px solid #c4d1b8;
+    border: 1px solid #C5BCAD; /* CORREGIDO: Borde con tono neutro */
     border-radius: 6px;
     box-sizing: border-box;
     font-family: 'Cormorant Garamond', serif;
     font-size: 1.1em;
     background-color: #ffffff;
-    color: #626c56;
+    color: #4B4B34; /* CORREGIDO: Color de texto principal */
     transition: all 0.3s ease;
 }
 
@@ -94,20 +94,20 @@
 .form-group select:focus,
 .form-group textarea:focus {
     outline: none;
-    border-color: #4c6c45;
-    box-shadow: 0 0 0 3px rgba(76, 108, 69, 0.2);
+    border-color: #6C6E4A; /* CORREGIDO: Color de acento en foco */
+    box-shadow: 0 0 0 3px rgba(108, 110, 74, 0.2); /* CORREGIDO: Sombra con color de acento */
 }
 
 /* --- NUEVO: Estilo para el campo de nombre cuando es de solo lectura --- */
 .form-group input[type="text"][readonly] {
-    background-color: #eef1ea; /* Un tono de la paleta para indicar que no es editable */
+    background-color: #E6E7E8; /* CORREGIDO: Tono neutro de la paleta para indicar "deshabilitado" */
     cursor: not-allowed;
-    color: #866C5B; /* Un color de texto que contraste pero se vea "deshabilitado" */
+    color: #866C5B;
 }
 
 .form-group select {
     appearance: none;
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23626c56' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%234B4B34' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e"); /* CORREGIDO: Color de la flecha */
     background-position: right 0.75rem center;
     background-repeat: no-repeat;
     background-size: 1.5em 1.5em;
@@ -117,8 +117,8 @@
 .form-container button[type="submit"] {
     width: 100%;
     padding: 15px;
-    background-color: #4c6c45;
-    color: #f8faf4;
+    background-color: #6C6E4A; /* CORREGIDO: Color de acento principal */
+    color: #FFFFFF; /* CORREGIDO: Blanco para mejor contraste */
     border: none;
     border-radius: 6px;
     font-family: 'Cormorant Garamond', serif;
@@ -130,7 +130,7 @@
 }
 
 .form-container button[type="submit"]:hover {
-    background-color: #3e5637;
+    background-color: #5a5c3e; /* CORREGIDO: Tono más oscuro del acento para hover */
 }
 
 #form-status {

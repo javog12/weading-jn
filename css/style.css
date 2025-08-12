@@ -88,3 +88,14 @@ h1, h2, h3 {
     75% { transform: translateX(calc(var(--sway-distance, 20px) * -1)); }
     100% { transform: translateX(0px); }
 }
+
+/* --- Estilos para Divisores de Sección Delgados y Sutiles --- */
+.section-divider::after {
+    content: '';
+    display: block;
+    height: 1px; /* El grosor de la línea será de solo 1px */
+    width: 60%;  /* No ocupará todo el ancho para ser más delicada */
+    max-width: 350px; /* Un ancho máximo en pantallas grandes */
+    margin: 4rem auto; /* La centra y le da espacio vertical */
+    background: linear-gradient(to right, transparent, #C5BCAD, transparent); /* Crea el efecto de desvanecimiento */
+}
