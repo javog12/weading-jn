@@ -4,11 +4,13 @@ body {
     font-weight: 300; /* Light weight by default */
     overflow-x: hidden; /* Prevents horizontal scrollbar from falling leaves */
 }
+
 /* Styles for all heading elements (h1, h2, h3) */
 h1, h2, h3 {
     font-family: 'Cormorant Garamond', serif; /* Bold font for titles */
     font-weight: 700; /* Ensures a bold weight for titles */
 }
+
 /* Custom Tailwind-like font classes */
 .font-playfair {
     font-family: 'Playfair Display', serif;
@@ -20,9 +22,13 @@ h1, h2, h3 {
 /* Hero Section Styles */
 /* --- INICIO DE LA CORRECCIÓN --- */
 .hero-background {
-    /* Las propiedades del fondo se movieron a .hero-overlay para mayor compatibilidad. */
-    /* Este elemento ahora solo actúa como contenedor. */
+    /* AJUSTE PARA SAFARI:
+       Esta propiedad crea un nuevo contexto de apilamiento sin afectar visualmente
+       al elemento. Resuelve el error en Safari donde un 'z-index: -1' en un 
+       elemento con 'position: fixed' lo hace desaparecer. */
+    transform: translateZ(0);
 }
+
 .hero-overlay {
     /* Hacemos que la capa de superposición sea fija en la pantalla.
        Esto reemplaza a 'background-attachment: fixed' y es mucho más confiable. */
@@ -39,6 +45,12 @@ h1, h2, h3 {
     /* Mantenemos las propiedades para que la imagen se vea bien. */
     background-size: cover;
     background-position: 50% 80%;
+    
+    /* Aseguramos que el overlay ocupe toda la pantalla */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
 /* --- FIN DE LA CORRECCIÓN --- */
 
@@ -50,6 +62,7 @@ h1, h2, h3 {
     margin-bottom: 0.5rem; /* Adjusts bottom margin for alignment */
     font-weight: 700; /* Bold colons */
 }
+
 /* Responsive adjustments for countdown colons */
 @media (min-width: 768px) {
     .countdown-colon {
@@ -93,6 +106,7 @@ h1, h2, h3 {
         opacity: 0; /* Fade out as it disappears */
     }
 }
+
 /* Keyframe animation for subtle swaying motion (optional realism) */
 @keyframes sway {
     0% { transform: translateX(0px); }
