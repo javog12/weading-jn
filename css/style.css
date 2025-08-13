@@ -4,11 +4,13 @@ body {
     font-weight: 300; /* Light weight by default */
     overflow-x: hidden; /* Prevents horizontal scrollbar from falling leaves */
 }
+
 /* Styles for all heading elements (h1, h2, h3) */
 h1, h2, h3 {
     font-family: 'Cormorant Garamond', serif; /* Bold font for titles */
     font-weight: 700; /* Ensures a bold weight for titles */
 }
+
 /* Custom Tailwind-like font classes */
 .font-playfair {
     font-family: 'Playfair Display', serif;
@@ -19,15 +21,35 @@ h1, h2, h3 {
 
 /* Hero Section Styles */
 .hero-background {
-    /* Background image for the hero section with parallax effect */
-    background-image: url('../images/0V5A0847-min.jpg'); /* Adjust path relative to CSS file */
-    background-size: cover;
-    background-position: 50% 80%; /* Adjusts image position */
-    background-attachment: fixed; /* Creates parallax effect */
+    /* AJUSTE PARA SAFARI:
+       Esta propiedad crea un nuevo contexto de apilamiento sin afectar visualmente
+       al elemento. Resuelve el error en Safari donde un 'z-index: -1' en un 
+       elemento con 'position: fixed' lo hace desaparecer. */
+    transform: translateZ(0);
 }
+
 .hero-overlay {
-    /* Darkens the hero image for better text legibility */
-    background-color: rgba(0, 0, 0, 0.4);
+    /* Hacemos que la capa de superposición sea fija en la pantalla.
+       Esto reemplaza a 'background-attachment: fixed' y es mucho más confiable. */
+    position: fixed;
+
+    /* La enviamos completamente detrás del contenido del header (como el texto).
+       Tu texto tiene 'z-10', por lo que siempre estará visible. */
+    z-index: -1;
+
+    /* Combinamos la imagen de fondo y el filtro oscuro en una sola línea.
+       El 'linear-gradient' actúa como el filtro de color sobre la imagen. */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('../images/0V5A0847-min.jpg');
+    
+    /* Mantenemos las propiedades para que la imagen se vea bien. */
+    background-size: cover;
+    background-position: 50% 80%;
+    
+    /* Aseguramos que el overlay ocupe toda la pantalla */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
 
 /* Countdown Timer Styles */
@@ -37,6 +59,7 @@ h1, h2, h3 {
     margin-bottom: 0.5rem; /* Adjusts bottom margin for alignment */
     font-weight: 700; /* Bold colons */
 }
+
 /* Responsive adjustments for countdown colons */
 @media (min-width: 768px) {
     .countdown-colon {
@@ -80,6 +103,7 @@ h1, h2, h3 {
         opacity: 0; /* Fade out as it disappears */
     }
 }
+
 /* Keyframe animation for subtle swaying motion (optional realism) */
 @keyframes sway {
     0% { transform: translateX(0px); }
