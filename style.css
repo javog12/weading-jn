@@ -1,0 +1,114 @@
+/* Base Styles for the entire body */
+body {
+    font-family: 'Cormorant Garamond', serif; /* Default font for paragraphs and general text */
+    font-weight: 300; /* Light weight by default */
+    overflow-x: hidden; /* Prevents horizontal scrollbar from falling leaves */
+}
+/* Styles for all heading elements (h1, h2, h3) */
+h1, h2, h3 {
+    font-family: 'Cormorant Garamond', serif; /* Bold font for titles */
+    font-weight: 700; /* Ensures a bold weight for titles */
+}
+/* Custom Tailwind-like font classes */
+.font-playfair {
+    font-family: 'Playfair Display', serif;
+}
+.font-cormorant-garamond {
+    font-family: 'Cormorant Garamond', serif;
+}
+
+/* Hero Section Styles */
+/* --- INICIO DE LA CORRECCIÓN --- */
+.hero-background {
+    /* Las propiedades del fondo se movieron a .hero-overlay para mayor compatibilidad. */
+    /* Este elemento ahora solo actúa como contenedor. */
+}
+.hero-overlay {
+    /* Hacemos que la capa de superposición sea fija en la pantalla.
+       Esto reemplaza a 'background-attachment: fixed' y es mucho más confiable. */
+    position: fixed;
+
+    /* La enviamos completamente detrás del contenido del header (como el texto).
+       Tu texto tiene 'z-10', por lo que siempre estará visible. */
+    z-index: -1;
+
+    /* Combinamos la imagen de fondo y el filtro oscuro en una sola línea.
+       El 'linear-gradient' actúa como el filtro de color sobre la imagen. */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('../images/0V5A0847-min.jpg');
+    
+    /* Mantenemos las propiedades para que la imagen se vea bien. */
+    background-size: cover;
+    background-position: 50% 80%;
+}
+/* --- FIN DE LA CORRECCIÓN --- */
+
+
+/* Countdown Timer Styles */
+.countdown-colon {
+    font-size: 4rem; /* Base size for colons */
+    line-height: 1; /* Aligns colons vertically with numbers */
+    margin-bottom: 0.5rem; /* Adjusts bottom margin for alignment */
+    font-weight: 700; /* Bold colons */
+}
+/* Responsive adjustments for countdown colons */
+@media (min-width: 768px) {
+    .countdown-colon {
+        font-size: 5rem;
+    }
+}
+@media (min-width: 1024px) {
+    .countdown-colon {
+        font-size: 6rem;
+    }
+}
+
+/* Falling Leaves Animation Styles */
+.leaf {
+    position: fixed; /* Fixed position to fall across the entire viewport */
+    top: -50px; /* Starts above the viewport */
+    width: var(--leaf-width); /* Width controlled by JS */
+    height: var(--leaf-height); /* Height controlled by JS */
+    opacity: 0.8;
+    pointer-events: none; /* Allows clicks through leaves */
+    z-index: 999; /* Ensures leaves are above content */
+    /* Stylized leaf shape using clip-path */
+    clip-path: polygon(50% 0%, 100% 30%, 80% 100%, 20% 100%, 0% 30%);
+    box-shadow: 0px 0px 5px rgba(0,0,0,0.2); /* Subtle shadow for depth */
+}
+
+/* Keyframe animation for falling motion */
+@keyframes fall {
+    0% {
+        top: -50px; /* Start above viewport */
+        transform: rotate(var(--initial-rotation, 0deg)); /* Initial rotation set by JS */
+        opacity: 0.8;
+    }
+    80% {
+        top: 100vh; /* Reach the bottom of the viewport */
+        opacity: 0.8;
+    }
+    100% {
+        top: calc(100vh + 50px); /* Go slightly beyond viewport */
+        transform: rotate(calc(var(--initial-rotation, 0deg) + 720deg)); /* Continues rotation */
+        opacity: 0; /* Fade out as it disappears */
+    }
+}
+/* Keyframe animation for subtle swaying motion (optional realism) */
+@keyframes sway {
+    0% { transform: translateX(0px); }
+    25% { transform: translateX(var(--sway-distance, 20px)); }
+    50% { transform: translateX(0px); }
+    75% { transform: translateX(calc(var(--sway-distance, 20px) * -1)); }
+    100% { transform: translateX(0px); }
+}
+
+/* --- Estilos para Divisores de Sección Delgados y Sutiles --- */
+.section-divider::after {
+    content: '';
+    display: block;
+    height: 1px; /* El grosor de la línea será de solo 1px */
+    width: 60%;  /* No ocupará todo el ancho para ser más delicada */
+    max-width: 350px; /* Un ancho máximo en pantallas grandes */
+    margin: 4rem auto; /* La centra y le da espacio vertical */
+    background: linear-gradient(to right, transparent, #C5BCAD, transparent); /* Crea el efecto de desvanecimiento */
+}
